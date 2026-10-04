@@ -37,10 +37,9 @@ http://localhost:8000
 | `content/publications.js` | Publication list and optional curated overrides |
 | `content/projects.js` | Project entries |
 | `content/teaching.js` | Teaching roles and course information |
-| `ui.js` | Shared rendering helpers |
+| `ui.js` | Shared HTML escaping and safe-link helpers; section markup stays in each content file |
 | `style.css` | Layout, typography, colors, and responsive styling |
-| `scholar_complete.json` | Publication dataset used by the site |
-| `content/content-samples.js` | Copy/paste examples for updating content |
+| `scholar_complete.json` | Publication dataset used by the site
 
 ## How to update the bio
 
@@ -153,17 +152,6 @@ export const workingPapers = [
 ## How to add teaching information
 
 Edit the relevant teaching content in `content/teaching.js` using the existing format in that file. Keep course names, institutions, and roles consistent with the site design.
-
-## Helper samples
-
-A ready-to-copy sample file is included at `content/content-samples.js`. It contains example objects for:
-
-- profile data
-- publication entries
-- project entries
-- working papers
-
-You can copy and paste those objects directly into the relevant JavaScript files.
 
 ## Notes
 

@@ -2,7 +2,6 @@ import { initializeResearchFeed } from "../app.js";
 import { escapeHtml, safeUrl } from "../ui.js";
 
 // Edit profile copy and links here. The portrait is shared with the sidebar.
-// For a ready-to-copy example, see content-samples.js in this folder.
 export const profile = {
   name: "Souryabrata Mohapatra",
   role: "Assistant Professor",
