@@ -1,4 +1,4 @@
-import { renderEntry } from "./ui.js";
+import { renderEntry } from "../ui.js";
 
 // Add entries as { title, authors, year, description, link, abstract }.
 export const workingPapers = [];

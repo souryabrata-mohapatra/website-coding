@@ -1,6 +1,17 @@
-import { renderEntry } from "./ui.js";
+import { renderEntry } from "../ui.js";
 
 // Add entries as { title, description, authors, year, link }.
+// Example:
+// export const projects = [
+// { 
+// title: "Sample Project", 
+// authors: "Your Name",
+// year: "2026", 
+// description: "Project description", 
+// link: "https://example.com" 
+// }
+// ];
+
 export const projects = [];
 
 export function renderProjects() {

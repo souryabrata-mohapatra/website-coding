@@ -1,7 +1,9 @@
-import { renderEntry } from "./ui.js";
+import { renderEntry } from "../ui.js";
 
 // By default use scholar_complete.json, also used by the Bio feed.
 // Set an array of { title, authors, publication, year, link } to curate the list.
+// Example:
+// export const publicationOverrides = [{ title: "Sample Paper", authors: "A. Author", year: 2026, publication: "Journal Name", link: "https://example.com" }];
 export const publicationOverrides = null;
 
 export function renderPublications() {

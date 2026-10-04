@@ -1,59 +1,174 @@
 # Souryabrata Mohapatra — academic website
 
-A static, single-page website with a fixed desktop sidebar and independently editable sections. On small screens the profile and navigation sit above the content. No build step is required.
+This project is a static academic portfolio site for an economics faculty profile. It includes a profile sidebar, bio section, publications, projects, working papers, and teaching information. The site is designed to be edited without a build step.
 
-## Preview locally
+## Overview
 
-From this directory, run `python -m http.server 8000`, then open `http://localhost:8000`. Use an HTTP server rather than opening `index.html` directly because the page uses JavaScript modules and fetches JSON.
+- Static single-page site
+- Desktop sidebar with section navigation
+- Responsive layout for smaller screens
+- Content is controlled through editable JavaScript files
+- Local data files are loaded with a simple HTTP server
 
-## File responsibilities
+## Run locally
 
-| File | Edit here |
+From the project directory, run:
+
+```bash
+python -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+> Do not open the page directly from the filesystem. The site uses JavaScript modules and fetches local JSON data, so it needs to be served over HTTP.
+
+## Main files and what to edit
+
+| File | Purpose |
 | --- | --- |
-| `main.js` | Page shell, section order, sidebar navigation, shared data loading |
-| `bio.js` | Welcome heading, biography, interests, portrait path, contact/profile links |
-| `app.js` | Research feed carousel, mounted inside Bio |
-| `working-papers.js` | Working paper entries (currently empty) |
-| `publications.js` | Publication list and optional curated overrides |
-| `projects.js` | Project entries (currently empty) |
-| `teaching.js` | Institutions, teaching roles, and course lists |
-| `ui.js` | Shared entry markup and HTML/URL helpers |
-| `style.css` | Design tokens, layout, shared components, responsive rules |
-| `scholar_complete.json` | Publication data shared by the feed and Publications |
+| `main.js` | Page shell, navigation, section order, shared data loading |
+| `content/bio.js` | Profile metadata, biography text, research interests, contact links |
+| `app.js` | Research feed carousel inside the bio section |
+| `content/working-papers.js` | Working paper entries |
+| `content/publications.js` | Publication list and optional curated overrides |
+| `content/projects.js` | Project entries |
+| `content/teaching.js` | Teaching roles and course information |
+| `ui.js` | Shared rendering helpers |
+| `style.css` | Layout, typography, colors, and responsive styling |
+| `scholar_complete.json` | Publication dataset used by the site |
+| `content/content-samples.js` | Copy/paste examples for updating content |
 
-Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`, `#teaching`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
+## How to update the bio
 
-## Content format
+Edit the `profile` object in `content/bio.js`.
 
-Populate the arrays in `working-papers.js` and `projects.js` with objects:
+```js
+export const profile = {
+  name: "Your Name",
+  role: "Assistant Professor",
+  department: "Department of Economics",
+  institution: "Your University",
+  image: "your-photo.jpg",
+  heading: "Welcome to my site!",
+  paragraphs: [
+    "Add your short bio here.",
+    "Write 2-4 short paragraphs.",
+    "Keep the style simple and professional."
+  ],
+  interests: [
+    "Applied Economics",
+    "Climate Policy",
+    "Development Economics"
+  ],
+  links: [
+    { label: "Email", icon: "✉", href: "mailto:you@example.edu" },
+    { label: "CV", icon: "CV", href: "https://example.com/cv" },
+    { label: "Google Scholar", icon: "g", href: "https://scholar.google.com/" }
+  ]
+};
+```
+
+Notes:
+
+- `image` should match an actual file in the project folder or an accessible path.
+- `links` can be edited to add email, CV, Google Scholar, LinkedIn, ORCID, etc.
+- Each paragraph is rendered separately, so keep them short and readable.
+
+## How to add publications
+
+The site uses `scholar_complete.json` by default. If you want to override the list with a curated set, set `publicationOverrides` in `content/publications.js`.
+
+```js
+export const publicationOverrides = [
+  {
+    title: "Sample Publication Title",
+    authors: "A. Author, B. Author",
+    year: 2026,
+    publication: "Journal of Sample Studies",
+    link: "https://example.com/publication"
+  }
+];
+```
+
+If you want to use the full local dataset, leave it as:
+
+```js
+export const publicationOverrides = null;
+```
+
+The objects support these fields:
 
 ```js
 {
-  title: "Paper or project title",
+  title: "Paper title",
   authors: "Author names",
-  year: "2026",
-  description: "Optional description",
+  year: 2026,
+  publication: "Journal or outlet",
+  description: "Optional short description",
   link: "https://example.com/paper",
   abstract: "Optional expandable abstract"
 }
 ```
 
-Empty arrays display “Details coming soon.” Publications use all entries from the local Scholar dataset, newest first; set `publicationOverrides` in `publications.js` to an array if you want a curated list. Update the dataset through the existing `RSS.py` workflow.
+## How to add projects
 
-## CSS standards
+Edit the array in `content/projects.js`:
 
-Use the variables at the top of `style.css` for site-wide changes:
+```js
+export const projects = [
+  {
+    title: "Sample Project",
+    authors: "Your Name",
+    year: "2026",
+    description: "Short summary of the project and its purpose.",
+    link: "https://example.com/project",
+    abstract: "Optional expanded abstract or methodology summary."
+  }
+];
+```
 
-| Role | Size token | Color token |
-| --- | --- | --- |
-| Body copy | `--font-body` (16px) | `--color-text` |
-| Welcome heading | `--font-title` (responsive) | `--color-heading` |
-| Section headings | `--font-section` (20px) | `--color-heading` |
-| Paper/course headings | `--font-entry` (16px) | `--color-heading` |
-| Supporting text | `--font-small` (14px) | `--color-muted` |
-| Interest labels | `--font-label` (13px) | `--color-label` |
-| Links | Inherited size | `--color-link` |
+If the array is empty, the site shows: `Details coming soon.`
 
-Reuse `.page-section`, `.section-title`, `.entry`, `.entry-title`, `.entry-meta`, and `.label` across sections. `.research-card` owns card appearance; `.carousel-*` rules own carousel layout and controls. Use the spacing tokens rather than adding separate typography or colors for each section.
+## How to add working papers
 
-The existing GitHub Pages and Scholar update workflows remain in place. A failed data request leaves the profile, navigation, and other sections usable, with a local unavailable message for the feed and Publications.
+Use the same structure as projects in `content/working-papers.js`:
+
+```js
+export const workingPapers = [
+  {
+    title: "Working Paper Title",
+    authors: "Your Name and Coauthor",
+    year: "2026",
+    description: "One or two lines describing the contribution.",
+    link: "https://example.com/working-paper",
+    abstract: "Optional detailed abstract."
+  }
+];
+```
+
+## How to add teaching information
+
+Edit the relevant teaching content in `content/teaching.js` using the existing format in that file. Keep course names, institutions, and roles consistent with the site design.
+
+## Helper samples
+
+A ready-to-copy sample file is included at `content/content-samples.js`. It contains example objects for:
+
+- profile data
+- publication entries
+- project entries
+- working papers
+
+You can copy and paste those objects directly into the relevant JavaScript files.
+
+## Notes
+
+- Navigation anchors use IDs such as `#bio`, `#publications`, `#projects`, and `#teaching`.
+- The active sidebar item follows scroll position automatically.
+- The research feed and publications gracefully show a fallback message when data is unavailable.
+- If the publication data changes, rerun the fetch or update process used for `scholar_complete.json`.
+

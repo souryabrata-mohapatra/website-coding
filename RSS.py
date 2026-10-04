@@ -7,7 +7,7 @@ from xml.sax.saxutils import escape
 
 import os
 
-API_KEY = os.environ.get("SERPAPI_KEY")
+API_KEY = os.getenv("SERPAPI_KEY") or "2f0fcbd46b8cf29dee8d8bb94d1b4066d75eed4293d0c6194a9b37bc4dfb4511"
 
 if not API_KEY:
     raise ValueError(
@@ -15,7 +15,8 @@ if not API_KEY:
     )
 AUTHOR_ID = "TKbYqt0AAAAJ"
 
-BASE_URL = "https://serpapi.com/search.json"
+# BASE_URL = "https://serpapi.com/search.json"
+BASE_URL = "https://serpapi.com/search?engine=google_scholar"
 
 all_articles = []
 seen_titles = set()
@@ -33,7 +34,7 @@ page = 1
 # while True:
 
 params = {
-    "engine": "google_scholar_author",
+    "engine": "google_scholar",
     "author_id": AUTHOR_ID,
     "hl": "en",
     "start": start,
@@ -50,6 +51,8 @@ if response.status_code != 200:
     print(response.text)
 
 data = response.json()
+
+print(f"Print this data in readable format==========: {json.dumps(data, indent=2)}")
 
 if author_info is None:
     author_info = data.get("author", {})

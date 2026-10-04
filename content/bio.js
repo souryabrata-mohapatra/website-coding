@@ -1,13 +1,14 @@
-import { initializeResearchFeed } from "./app.js";
-import { escapeHtml, safeUrl } from "./ui.js";
+import { initializeResearchFeed } from "../app.js";
+import { escapeHtml, safeUrl } from "../ui.js";
 
 // Edit profile copy and links here. The portrait is shared with the sidebar.
+// For a ready-to-copy example, see content-samples.js in this folder.
 export const profile = {
   name: "Souryabrata Mohapatra",
   role: "Assistant Professor",
   department: "Department of Economics",
   institution: "IIT Jodhpur",
-  image: "sourya.jpg",
+  image: "content/sourya.jpg",
   heading: "Welcome to my site!",
   paragraphs: [
     "I am an Assistant Professor in the Department of Economics at IIT Jodhpur. I completed my PhD in Economics from the University of Auckland Business School.",

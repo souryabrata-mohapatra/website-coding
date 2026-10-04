@@ -1,4 +1,4 @@
-import { escapeHtml } from "./ui.js";
+import { escapeHtml } from "../ui.js";
 
 // Teaching history carried over from the original profile.
 export const teaching = [

@@ -1,8 +1,8 @@
-import { profile, renderProfileLinks, renderBio, mountBio } from "./bio.js";
-import { renderWorkingPapers } from "./working-papers.js";
-import { renderPublications, mountPublications } from "./publications.js";
-import { renderProjects } from "./projects.js";
-import { renderTeaching } from "./teaching.js";
+import { profile, renderProfileLinks, renderBio, mountBio } from "./content/bio.js";
+import { renderWorkingPapers } from "./content/working-papers.js";
+import { renderPublications, mountPublications } from "./content/publications.js";
+import { renderProjects } from "./content/projects.js";
+import { renderTeaching } from "./content/teaching.js";
 import { escapeHtml } from "./ui.js";
 
 // Single registry for section order, sidebar labels, and navigation.
@@ -17,6 +17,7 @@ const sections = [
 document.getElementById("app").innerHTML = `
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
+  
     <aside class="sidebar" aria-label="Profile and navigation">
       <div class="sidebar-profile">
         <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
@@ -28,6 +29,7 @@ document.getElementById("app").innerHTML = `
       </nav>
       <div class="profile-links" aria-label="Contact and academic profiles">${renderProfileLinks()}</div>
     </aside>
+
     <main id="main-content" class="main-content" tabindex="-1">
       ${sections.map(({ render }) => render()).join("")}
       <footer class="site-footer">© ${new Date().getFullYear()} ${escapeHtml(profile.name)}. All rights reserved.</footer>
