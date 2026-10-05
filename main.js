@@ -8,11 +8,12 @@ import { escapeHtml } from "./ui.js";
 // Single registry for section order, sidebar labels, and navigation.
 const sections = [
   { id: "bio", label: "Bio", render: renderBio },
-  { id: "working-papers", label: "Working Papers", render: renderWorkingPapers },
   { id: "publications", label: "Publications", render: renderPublications },
+  { id: "working-papers", label: "Working Papers", render: renderWorkingPapers },
   { id: "projects", label: "Projects", render: renderProjects },
   { id: "teaching", label: "Teaching", render: renderTeaching }
 ];
+ // <p class="profile-affiliation">${escapeHtml(profile.role)}<br>${escapeHtml(profile.department)}<br>${escapeHtml(profile.institution)}</p></div>
 
 document.getElementById("app").innerHTML = `
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -21,12 +22,13 @@ document.getElementById("app").innerHTML = `
       <div class="sidebar-profile">
         <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
         <div><p class="profile-name">${escapeHtml(profile.name)}</p>
-          <p class="profile-affiliation">${escapeHtml(profile.role)}<br>${escapeHtml(profile.department)}<br>${escapeHtml(profile.institution)}</p></div>
+        <div class="profile-links" aria-label="Contact and academic profiles">${renderProfileLinks()}</div>
+
       </div>
       <nav class="section-nav" aria-label="Main navigation">
         ${sections.map(({ id, label }) => `<a href="#${id}" data-section="${id}">${label}</a>`).join("")}
       </nav>
-      <div class="profile-links" aria-label="Contact and academic profiles">${renderProfileLinks()}</div>
+      
     </aside>
     <main id="main-content" class="main-content" tabindex="-1">
       ${sections.map(({ render }) => render()).join("")}
