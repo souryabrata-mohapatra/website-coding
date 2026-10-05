@@ -2,6 +2,7 @@ import { renderEntry } from "./ui.js";
 
 // By default use scholar_complete.json, also used by the Bio feed.
 
+// create similar object (like from line 7 till 14) to add new publications to this list. Also moving it up and down will change the order of publications on the page.
 export const publicationOverrides = [
   {
       "title": "Dis (em) Powering Women in a Globalised World: Mapping Evidence from a PRISMA-Based Systematic Literature Review",
