@@ -79,6 +79,9 @@ h1:focus, h2:focus, main:focus { outline: none; }
 .entry-title a:hover { color: var(--color-link); text-decoration: underline; }
 .entry-meta, .empty-state { color: var(--color-muted); font-size: var(--font-small); }
 .entry-meta { margin-bottom: 4px; line-height: 1.6; }
+.media-links { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+.media-links a { color: var(--color-heading); text-decoration: underline; }
+.media-links a:hover { color: var(--color-link); }
 .entry-abstract { margin-top: var(--space-1); font-size: var(--font-small); }
 .entry-abstract summary { width: fit-content; color: var(--color-heading); cursor: pointer; text-decoration: underline; }
 .entry-abstract summary:hover { color: var(--color-link); }
@@ -169,26 +172,25 @@ h1:focus, h2:focus, main:focus { outline: none; }
 .carousel-button-next { right: 0; }
 .carousel-empty { padding: var(--space-3) 0; color: var(--color-muted); font-size: var(--font-small); }
 
-@media (max-width: 1000px) and (min-width: 761px) {
-  :root { --sidebar-width: 240px; }
-  .sidebar { padding: 32px 22px; }
-  .main-content { padding: 36px 30px 24px; }
+@media (max-width: 850px) {
+  :root { --space-section: 2.5rem; }
+  .sidebar { position: relative; width: 100%; padding: 24px 22px 18px; border-right: 0; border-bottom: 1px solid var(--color-line); overflow: visible; }
+  .sidebar-profile { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .portrait-link { width: 120px; flex-shrink: 0; margin: 0; }
+  .profile-name { font-size: 1.2rem; }
+  .profile-affiliation { margin: 0; font-size: var(--font-label); }
+  .section-nav { flex-direction: row; gap: 4px; margin-top: 16px; padding-top: 15px; }
+  .section-nav a { margin: 0; padding: 5px 8px; text-align: center; }
+  .section-nav a[aria-current] { box-shadow: inset 0 -2px var(--color-link); }
+  .profile-links { justify-content: center; margin-top: 0; }
+  .main-content { margin-left: 0; padding: 28px 30px; }
+  .page-section { scroll-margin-top: 20px; }
+  .research-card { min-height: 200px; padding: 18px 16px 16px; }
 }
 
 @media (max-width: 760px) {
-  :root { --space-section: 2.5rem; }
-  .sidebar { position: relative; width: 100%; padding: 24px 22px 18px; border-right: 0; border-bottom: 1px solid var(--color-line); overflow: visible; }
-  .sidebar-profile { display: flex; align-items: center; gap: 18px; }
-  .portrait-link { width: 96px; flex-shrink: 0; margin: 0; }
-  .profile-name { font-size: 1.2rem; }
-  .profile-affiliation { margin: 0; font-size: var(--font-label); }
-  .section-nav { flex-direction: row; flex-wrap: wrap; gap: 4px; margin-top: 0px; padding-top: 15px; }
-  .section-nav a { margin: 0; padding: 5px 8px; }
-  .section-nav a[aria-current] { box-shadow: inset 0 -2px var(--color-link); }
-  .profile-links { margin-top: 14px; }
-  .main-content { margin-left: 0; padding: 28px 22px; }
-  .page-section { scroll-margin-top: 20px; }
-  .research-card { min-height: 200px; padding: 18px 16px 16px; }
+  .portrait-link { width: 96px; }
+  .main-content { padding: 28px 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
