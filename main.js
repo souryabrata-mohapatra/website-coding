@@ -49,7 +49,7 @@ function setActiveSection(id) {
 function navigateToHash(focus = false) {
   const section = sectionElements.find((element) => `#${element.id}` === location.hash);
   if (!section) return;
-  section.scrollIntoView({ behavior: "instant", block: "start" });
+  window.scrollTo({ top: Math.max(0, section.offsetTop - 32), behavior: "instant" });
   if (focus) section.querySelector("h1, h2").focus({ preventScroll: true });
   setActiveSection(section.id);
 }

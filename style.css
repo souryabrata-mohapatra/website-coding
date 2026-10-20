@@ -27,12 +27,13 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body {
   margin: 0;
   background: var(--color-background);
   color: var(--color-text);
   font: 400 var(--font-body)/1.75 var(--font-family);
+  overflow-anchor: none;
 }
 a { color: var(--color-link); text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
