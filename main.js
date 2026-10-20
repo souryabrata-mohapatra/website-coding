@@ -54,7 +54,16 @@ function navigateToHash(focus = false) {
   setActiveSection(section.id);
 }
 
-// Native anchors preserve deep links, browser history, and keyboard navigation.
+// Handle section links once so native hash scrolling and script scrolling do not both run.
+navigation.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const href = link.getAttribute("href");
+    if (!href) return;
+    window.history.pushState(null, "", href);
+    navigateToHash(true);
+  });
+});
 window.addEventListener("hashchange", () => navigateToHash(true));
 let scrollPending = false;
 function updateActiveSection() {
