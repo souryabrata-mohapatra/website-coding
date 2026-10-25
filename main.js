@@ -13,17 +13,19 @@ const sections = [
   { id: "projects", label: "Projects", render: renderProjects },
   { id: "teaching", label: "Teaching", render: renderTeaching }
 ];
- // <p class="profile-affiliation">${escapeHtml(profile.role)}<br>${escapeHtml(profile.department)}<br>${escapeHtml(profile.institution)}</p></div>
-
 document.getElementById("app").innerHTML = `
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
+    <header class="site-header" itemscope itemtype="https://schema.org/Person">
+      <h1 class="site-title" itemprop="name">${escapeHtml(profile.name)}</h1>
+      <p class="site-subtitle"><span itemprop="jobTitle">${escapeHtml(profile.role)}</span>, ${escapeHtml(profile.department)}, <span itemprop="worksFor" itemscope itemtype="https://schema.org/CollegeOrUniversity"><span itemprop="name">Indian Institute of Technology Jodhpur</span></span></p>
+    </header>
     <aside class="sidebar" aria-label="Profile and navigation">
       <div class="sidebar-profile">
         <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
-        <div><p class="profile-name">${escapeHtml(profile.name)}</p>
+        <div>
         <div class="profile-links" aria-label="Contact and academic profiles">${renderProfileLinks()}</div>
-
+        </div>
       </div>
       <nav class="section-nav" aria-label="Main navigation">
         ${sections.map(({ id, label }) => `<a href="#${id}" data-section="${id}">${label}</a>`).join("")}
@@ -32,7 +34,7 @@ document.getElementById("app").innerHTML = `
     </aside>
     <main id="main-content" class="main-content" tabindex="-1">
       ${sections.map(({ render }) => render()).join("")}
-      <footer class="site-footer">© ${new Date().getFullYear()} ${escapeHtml(profile.name)}. All rights reserved.</footer>
+      <footer class="site-footer">&copy; ${new Date().getFullYear()} ${escapeHtml(profile.name)}. All rights reserved.</footer>
     </main>
   </div>`;
 

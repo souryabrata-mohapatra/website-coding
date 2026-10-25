@@ -8,7 +8,7 @@ export const profile = {
   department: "Department of Economics",
   institution: "IIT Jodhpur",
   image: "sourya.jpg",
-  heading: "Welcome to my site!",
+  heading: "About",
   paragraphs: [
     "I am an Assistant Professor in the Department of Economics at IIT Jodhpur. I completed my PhD in Economics from the University of Auckland Business School.",
     "My research examines climate risks, agricultural transformation, circular systems, energy transitions, and distress migration, particularly in contexts shaped by structural development challenges.",
@@ -17,24 +17,25 @@ export const profile = {
   ],
   interests: ["Applied Economics", "Climate Change", "Agricultural Transformation", "Green Transition", "Just Migration"],
   links: [
-    { label: "Email", icon: "✉", href: "mailto:smohapatra@iitj.ac.in" },
-    { label: "CV", icon: "CV", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
-    { label: "Google Scholar", icon: "g", href: "https://scholar.google.com/citations?user=TKbYqt0AAAAJ&hl=en" },
-    { label: "LinkedIn", icon: "in", href: "https://www.linkedin.com/in/souryabrata" },
-    { label: "ORCID", icon: "iD", href: "https://orcid.org/0000-0002-3627-8739" }
+    { label: "Email", icon: "mail.jpeg", href: "mailto:smohapatra@iitj.ac.in" },
+    { label: "CV", icon: "cv.jpeg", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
+    { label: "Google Scholar", icon: "scholar.jpeg", href: "https://scholar.google.com/citations?user=TKbYqt0AAAAJ&hl=en" },
+    { label: "LinkedIn", icon: "linkedin.jpeg", href: "https://www.linkedin.com/in/souryabrata" },
+    { label: "ORCID", icon: "iD.jpeg", href: "https://orcid.org/0000-0002-3627-8739" },
+    { label: "GitHub", icon: "github.jpeg", href: "https://github.com/souryabrata-mohapatra" }
   ],
 
 };
 
 export function renderProfileLinks() {
   return profile.links.map(({ label, icon, href }) =>
-    `<a href="${safeUrl(href)}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" class="social-icon"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"'}><span aria-hidden="true">${escapeHtml(icon || label)}</span></a>`
+    `<a href="${safeUrl(href)}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" class="social-icon"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"'}><img src="icons/${escapeHtml(icon)}" alt="" loading="lazy" width="36" height="36"></a>`
   ).join("");
 }
 
 export function renderBio() {
   return `<section id="bio" class="page-section bio-section" aria-labelledby="bio-title">
-    <h1 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h1>
+    <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
     <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
     <ul class="interest-list" aria-label="Research interests">${profile.interests.map((interest) => `<li class="label">${escapeHtml(interest)}</li>`).join("")}</ul>
     <div class="research-feed" aria-labelledby="research-feed-title">
