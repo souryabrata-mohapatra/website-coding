@@ -51,7 +51,8 @@ function setActiveSection(id) {
 function navigateToHash(focus = false) {
   const section = sectionElements.find((element) => `#${element.id}` === location.hash);
   if (!section) return;
-  window.scrollTo({ top: Math.max(0, section.offsetTop - 32), behavior: "instant" });
+  const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
+  window.scrollTo({ top: Math.max(0, section.offsetTop - headerHeight - 16), behavior: "instant" });
   if (focus) section.querySelector("h1, h2").focus({ preventScroll: true });
   setActiveSection(section.id);
 }
