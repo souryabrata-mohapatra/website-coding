@@ -52,8 +52,8 @@ function navigateToHash(focus = false) {
   const section = sectionElements.find((element) => `#${element.id}` === location.hash);
   if (!section) return;
   const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
-  window.scrollTo({ top: Math.max(0, section.offsetTop - headerHeight - 16), behavior: "instant" });
   if (focus) section.querySelector("h1, h2").focus({ preventScroll: true });
+  window.scrollTo({ top: Math.max(0, section.offsetTop - headerHeight - 16), behavior: "instant" });
   setActiveSection(section.id);
 }
 
@@ -72,8 +72,10 @@ let scrollPending = false;
 function updateActiveSection() {
   scrollPending = false;
   let current = sectionElements[0];
+  const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
+  const activationOffset = headerHeight + 24;
   for (const section of sectionElements) {
-    if (section.getBoundingClientRect().top <= 100) current = section;
+    if (section.getBoundingClientRect().top <= activationOffset) current = section;
   }
   if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
     current = sectionElements.at(-1);
