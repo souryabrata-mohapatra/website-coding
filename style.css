@@ -32,6 +32,8 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+.js-enabled #app { visibility: hidden; }
+.js-enabled.app-ready #app { visibility: visible; }
 body {
   margin: 0;
   background: var(--color-background);

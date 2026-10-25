@@ -106,6 +106,7 @@ try {
 }
 mountBio(data, dataError);
 mountPublications(data, dataError);
+document.documentElement.classList.add("app-ready");
 // Restore deep links after asynchronous content takes up its space.
 requestAnimationFrame(() => {
   navigateToHash();
