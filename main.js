@@ -16,10 +16,6 @@ const sections = [
 document.getElementById("app").innerHTML = `
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
-    <header class="site-header" itemscope itemtype="https://schema.org/Person">
-      <h1 class="site-title" itemprop="name">${escapeHtml(profile.name)}</h1>
-      <p class="site-subtitle"><span itemprop="jobTitle">${escapeHtml(profile.role)}</span>, ${escapeHtml(profile.department)}, <span itemprop="worksFor" itemscope itemtype="https://schema.org/CollegeOrUniversity"><span itemprop="name">Indian Institute of Technology Jodhpur</span></span></p>
-    </header>
     <aside class="sidebar" aria-label="Profile and navigation">
       <div class="sidebar-profile">
         <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
@@ -51,9 +47,8 @@ function setActiveSection(id) {
 function navigateToHash(focus = false) {
   const section = sectionElements.find((element) => `#${element.id}` === location.hash);
   if (!section) return;
-  const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
   if (focus) section.querySelector("h1, h2").focus({ preventScroll: true });
-  window.scrollTo({ top: Math.max(0, section.offsetTop - headerHeight - 16), behavior: "instant" });
+  window.scrollTo({ top: Math.max(0, section.offsetTop - 16), behavior: "instant" });
   setActiveSection(section.id);
 }
 
@@ -72,8 +67,7 @@ let scrollPending = false;
 function updateActiveSection() {
   scrollPending = false;
   let current = sectionElements[0];
-  const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
-  const activationOffset = headerHeight + 24;
+  const activationOffset = 24;
   for (const section of sectionElements) {
     if (section.getBoundingClientRect().top <= activationOffset) current = section;
   }

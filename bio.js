@@ -8,7 +8,7 @@ export const profile = {
   department: "Department of Economics",
   institution: "IIT Jodhpur",
   image: "sourya.jpg",
-  heading: "About",
+  heading: "Souryabrata Mohapatra",
   paragraphs: [
     "I am an Assistant Professor in the Department of Economics at IIT Jodhpur. I completed my PhD in Economics from the University of Auckland Business School.",
     "My research examines climate risks, agricultural transformation, circular systems, energy transitions, and distress migration, particularly in contexts shaped by structural development challenges.",
@@ -35,7 +35,7 @@ export function renderProfileLinks() {
 
 export function renderBio() {
   return `<section id="bio" class="page-section bio-section" aria-labelledby="bio-title">
-    <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
+    <h1 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h1>
     <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
     <ul class="interest-list" aria-label="Research interests">${profile.interests.map((interest) => `<li class="label">${escapeHtml(interest)}</li>`).join("")}</ul>
     <div class="research-feed" aria-labelledby="research-feed-title">

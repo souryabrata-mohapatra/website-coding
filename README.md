@@ -47,7 +47,7 @@ Use the variables at the top of `style.css` for site-wide changes:
 | Role | Size token | Color token |
 | --- | --- | --- |
 | Body copy | `--font-body` (16px) | `--color-text` |
-| Welcome heading | `--font-title` (responsive) | `--color-heading` |
+| Professor name heading | `--font-title` (responsive) | `--color-heading` |
 | Section headings | `--font-section` (20px) | `--color-heading` |
 | Paper/course headings | `--font-entry` (16px) | `--color-heading` |
 | Supporting text | `--font-small` (14px) | `--color-muted` |
