@@ -6,6 +6,17 @@ A static, single-page website with a fixed desktop sidebar and independently edi
 
 From this directory, run `python -m http.server 8000`, then open `http://localhost:8000`. Use an HTTP server rather than opening `index.html` directly because the page uses JavaScript modules and fetches JSON.
 
+## Search indexing
+
+The public Google Sites URL is the canonical site:
+`https://sites.google.com/view/souryabrata/home`.
+
+`index.html` permits indexing. After deploying changes, add the Google Sites URL
+as a property in Google Search Console and request indexing. Keep the Google
+Sites page public and link to the embedded site with visible text; hiding a page
+from Google Sites navigation does not itself block indexing, but it can make the
+page harder for crawlers to discover.
+
 ## File responsibilities
 
 | File | Edit here |
