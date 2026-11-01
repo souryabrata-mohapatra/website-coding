@@ -8,7 +8,7 @@ export const profile = {
   department: "Department of Economics",
   institution: "IIT Jodhpur",
   image: "sourya.jpg",
-  heading: "Souryabrata Mohapatra",
+  heading: "Hello and welcome!",
   paragraphs: [
     "I am an Assistant Professor in the Department of Economics at IIT Jodhpur. I completed my PhD in Economics from the University of Auckland Business School.",
     "My research examines climate risks, agricultural transformation, circular systems, energy transitions, and distress migration, particularly in contexts shaped by structural development challenges.",
@@ -35,11 +35,16 @@ export function renderProfileLinks() {
 
 export function renderBio() {
   return `<section id="bio" class="page-section bio-section" aria-labelledby="bio-title">
-    <h1 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h1>
-    <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
-    <ul class="interest-list" aria-label="Research interests">${profile.interests.map((interest) => `<li class="label">${escapeHtml(interest)}</li>`).join("")}</ul>
+    <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
+    <div class="bio-details">
+      <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
+      <aside class="interest-list" aria-label="Research interests">
+        <span class="keyword keyword-fixed">Applied Economics</span>
+        <div class="keyword-stack">${profile.interests.filter((interest) => interest !== "Applied Economics").map((interest, index) => `<span class="keyword${index === 0 ? " is-emphasized" : ""}" data-keyword-index="${index}">${escapeHtml(interest)}</span>`).join("")}</div>
+      </aside>
+    </div>
     <div class="research-feed" aria-labelledby="research-feed-title">
-      <h2 id="research-feed-title" class="section-title">Research Feed</h2>
+      <h2 id="research-feed-title" class="section-title">Scholarly Feed</h2>
       <div id="research-feed"><p class="empty-state" role="status">Loading research feed…</p></div>
     </div>
   </section>`;
@@ -51,4 +56,16 @@ export function mountBio(data, error) {
     return;
   }
   initializeResearchFeed(data);
+  initializeKeywordRotation();
+}
+
+function initializeKeywordRotation() {
+  const keywords = [...document.querySelectorAll(".keyword-stack .keyword")];
+  if (keywords.length < 2) return;
+  let activeIndex = 0;
+  window.setInterval(() => {
+    keywords[activeIndex].classList.remove("is-emphasized");
+    activeIndex = (activeIndex + 1) % keywords.length;
+    keywords[activeIndex].classList.add("is-emphasized");
+  }, 2400);
 }

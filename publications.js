@@ -17,6 +17,7 @@ const publicationFigures = [
   { number: 2, file: "paper 2.png" },
   { number: 1, file: "paper 1.jpg" }
 ];
+const enlargedPublicationFigures = new Set([18, 17, 4]);
 
 // create similar object (like from line 7 till 14) to add new publications to this list. Also moving it up and down will change the order of publications on the page.
 export const publicationOverrides = [
@@ -243,9 +244,9 @@ export function renderPublications() {
         <div id="publication-list"><p class="empty-state" role="status">Loading publications…</p></div>
       </div>
       <aside class="publication-gallery" aria-label="Publication figures">
-         ${publicationFigures.map(({ number, file }) => `<figure class="publication-figure">
+         ${publicationFigures.map(({ number, file }) => `<figure class="publication-figure${enlargedPublicationFigures.has(number) ? " publication-figure--enlarged" : ""}">
           <img src="images/${file}" alt="Figure for paper ${number}" loading="lazy" decoding="async">
-          <figcaption>Paper ${number}</figcaption>
+          <figcaption>Source: Publication ${number}</figcaption>
         </figure>`).join("")}
       </aside>
     </div>

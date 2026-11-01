@@ -6,12 +6,23 @@ A static, single-page website with a fixed desktop sidebar and independently edi
 
 From this directory, run `python -m http.server 8000`, then open `http://localhost:8000`. Use an HTTP server rather than opening `index.html` directly because the page uses JavaScript modules and fetches JSON.
 
+## Search indexing
+
+The public Google Sites URL is the canonical site:
+`https://sites.google.com/view/souryabrata/home`.
+
+`index.html` permits indexing. After deploying changes, add the Google Sites URL
+as a property in Google Search Console and request indexing. Keep the Google
+Sites page public and link to the embedded site with visible text; hiding a page
+from Google Sites navigation does not itself block indexing, but it can make the
+page harder for crawlers to discover.
+
 ## File responsibilities
 
 | File | Edit here |
 | --- | --- |
 | `main.js` | Page shell, section order, sidebar navigation, shared data loading |
-| `bio.js` | Welcome heading, biography, interests, portrait path, contact/profile links |
+| `bio.js` | Welcome heading, biography, rotating interests, portrait path, contact/profile links |
 | `app.js` | Research feed carousel, mounted inside Bio |
 | `working-papers.js` | Working paper entries (currently empty) |
 | `publications.js` | Publication list and optional curated overrides |
@@ -21,7 +32,7 @@ From this directory, run `python -m http.server 8000`, then open `http://localho
 | `style.css` | Design tokens, layout, shared components, responsive rules |
 | `scholar_complete.json` | Publication data shared by the feed and Publications |
 
-Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`, `#teaching`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
+Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
 
 ## Content format
 
