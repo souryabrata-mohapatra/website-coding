@@ -120,7 +120,7 @@ function handleDragStart(event) {
   if (
     event.pointerType === "touch" ||
     event.button !== 0 ||
-    event.target.closest(".carousel-button")
+    event.target.closest(".carousel-button, a")
   ) {
     return;
   }
@@ -256,8 +256,6 @@ function renderCarousel() {
 }
 
 function createCardMarkup(article) {
-  const scholarQuery = encodeURIComponent(article.title || "");
-
   return `
     <article class="research-card carousel-card">
       <div class="entry-title">
@@ -273,21 +271,6 @@ function createCardMarkup(article) {
       <div class="research-card-publication">
         <div class="publication-source">
           ${escapeHtml(article.publication || article.year || "")}
-        </div>
-        <div class="publication-info">
-          <img
-            src="icons/scholar.jpeg"
-            alt=""
-            class="scholar-icon"
-            width="20"
-            height="20"
-            loading="lazy"
-          />
-          <a
-            href="https://scholar.google.com/scholar?q=${scholarQuery}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >scholar.google.com</a>
         </div>
       </div>
     </article>

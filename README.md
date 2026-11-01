@@ -11,7 +11,7 @@ From this directory, run `python -m http.server 8000`, then open `http://localho
 | File | Edit here |
 | --- | --- |
 | `main.js` | Page shell, section order, sidebar navigation, shared data loading |
-| `bio.js` | Welcome heading, biography, interests, portrait path, contact/profile links |
+| `bio.js` | Welcome heading, biography, rotating interests, portrait path, contact/profile links |
 | `app.js` | Research feed carousel, mounted inside Bio |
 | `working-papers.js` | Working paper entries (currently empty) |
 | `publications.js` | Publication list and optional curated overrides |
@@ -21,7 +21,7 @@ From this directory, run `python -m http.server 8000`, then open `http://localho
 | `style.css` | Design tokens, layout, shared components, responsive rules |
 | `scholar_complete.json` | Publication data shared by the feed and Publications |
 
-Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`, `#teaching`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
+Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
 
 ## Content format
 

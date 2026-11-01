@@ -15,22 +15,26 @@ export function safeUrl(value) {
 }
 
 export function renderEntry({ title, authors, publication, year, description, link, abstract, media, label }) {
-  const mediaLinks = Array.isArray(media) ? media.filter((item) => item && item.label && !/^\[paper\]$/i.test(item.label.trim())) : [];
-  const paperLink = Array.isArray(media)
-    ? media.find((item) => item && item.link && /^\[paper\]$/i.test(item.label?.trim()))?.link
+  const mediaItems = Array.isArray(media) ? media.filter((item) => item && item.label) : [];
+  const paperLink = mediaItems
+    .find((item) => item.link && /^\[paper\]$/i.test(item.label.trim()))?.link;
+  const pdfLink = mediaItems.find((item) => item.link && /^\[pdf\]$/i.test(item.label.trim()))?.link || link;
+  const mediaLinks = mediaItems.filter((item) => !/^\[(paper|pdf)\]$/i.test(item.label.trim()));
+  const actionMarkup = paperLink || pdfLink
+    ? `<span class="entry-actions">${paperLink ? `<a class="entry-button" href="${safeUrl(paperLink)}" target="_blank" rel="noopener noreferrer">DOI</a>` : ""}${pdfLink ? `<a class="entry-button" href="${safeUrl(pdfLink)}" target="_blank" rel="noopener noreferrer">PDF</a>` : ""}</span>`
     : "";
-  const titleLink = link || paperLink;
   const mediaMarkup = mediaLinks.length
     ? `<p class="entry-meta media-links">${mediaLinks.map((item) => {
         const href = item.link;
-        return href ? ` <a href="${safeUrl(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.label)}</a>` : escapeHtml(item.label);
-      }).join(" ")}</p>`
+        const labelText = item.label.replace(/^\[|\]$/g, "");
+        return href ? `<a href="${safeUrl(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(labelText)}</a>` : escapeHtml(labelText);
+      }).join(" | ")}</p>`
     : "";
 
   return `<article class="entry">
-    <h3 class="entry-title">${label ? `<span class="entry-label">[${escapeHtml(label)}]</span>` : ""}${titleLink ? `<a href="${safeUrl(titleLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
+    <h3 class="entry-title">${label ? `<span class="entry-label">[${escapeHtml(label)}]</span>` : ""}${escapeHtml(title)} ${actionMarkup}</h3>
     ${authors ? `<p class="entry-meta">${escapeHtml(authors)}</p>` : ""}
-    ${publication || year ? `<p class="entry-meta">${escapeHtml(publication || year)}</p>` : ""}
+    ${publication || year ? `<p class="entry-meta publication-name">${escapeHtml(publication || year)}</p>` : ""}
     ${mediaMarkup}
     ${description ? `<p>${escapeHtml(description)}</p>` : ""}
     ${abstract ? `<details class="entry-abstract"><summary>Abstract</summary><p>${escapeHtml(abstract)}</p></details>` : ""}
