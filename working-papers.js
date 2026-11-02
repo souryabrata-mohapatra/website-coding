@@ -28,9 +28,24 @@ export const workingPapers = [
   }
 ];
 
+const workingPaperFigures = [
+  { file: "WP_1.png", caption: "Source: Working paper 3" },
+  { file: "WP_2.png", caption: "Source: Working paper 2" }
+];
+
 export function renderWorkingPapers() {
   return `<section id="working-papers" class="page-section" aria-labelledby="working-papers-title">
     <h2 id="working-papers-title" class="section-title" tabindex="-1">Working Papers</h2>
-    ${workingPapers.length ? workingPapers.map(renderEntry).join("") : '<p class="empty-state">Details coming soon.</p>'}
+    <div class="publication-columns working-paper-columns">
+      <div class="publication-main">
+        ${workingPapers.length ? workingPapers.map((paper, index) => renderEntry({ ...paper, label: workingPapers.length - index })).join("") : '<p class="empty-state">Details coming soon.</p>'}
+      </div>
+      <aside class="publication-gallery" aria-label="Working paper figures">
+        ${workingPaperFigures.map(({ file, caption }) => `<figure class="publication-figure">
+          <img src="images/working_paper/${file}" alt="${caption}" loading="lazy" decoding="async">
+          <figcaption>${caption}</figcaption>
+        </figure>`).join("")}
+      </aside>
+    </div>
   </section>`;
 }
