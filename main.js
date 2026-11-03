@@ -34,7 +34,7 @@ document.getElementById("app").innerHTML = `
       <div class="sidebar-profile">
         <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
         <div class="sidebar-identity">
-          <strong>${escapeHtml(profile.name)}</strong>
+          <h1 class="sidebar-title">${escapeHtml(profile.name)}</h1>
           <span>${escapeHtml(profile.role)}</span>
           <span>${escapeHtml(profile.department)}</span>
           <span>${escapeHtml(profile.institution)}</span>

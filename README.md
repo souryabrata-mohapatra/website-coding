@@ -24,9 +24,9 @@ page harder for crawlers to discover.
 | `main.js` | Page shell, section order, sidebar navigation, shared data loading |
 | `bio.js` | Welcome heading, biography, rotating interests, portrait path, contact/profile links |
 | `app.js` | Research feed carousel, mounted inside Bio |
-| `working-papers.js` | Working paper entries (currently empty) |
+| `working-papers.js` | Working paper entries and figures |
 | `publications.js` | Publication list and optional curated overrides |
-| `projects.js` | Project entries (currently empty) |
+| `projects.js` | Project entries and funder/category metadata |
 | `teaching.js` | Institutions, teaching roles, and course lists |
 | `ui.js` | Shared entry markup and HTML/URL helpers |
 | `style.css` | Design tokens, layout, shared components, responsive rules |
@@ -43,13 +43,19 @@ Populate the arrays in `working-papers.js` and `projects.js` with objects:
   title: "Paper or project title",
   authors: "Author names",
   year: "2026",
+  publication: "Journal name",
   description: "Optional description",
   link: "https://example.com/paper",
-  abstract: "Optional expandable abstract"
+  abstract: "Optional expandable abstract",
+  media: [
+    { label: "[paper]", link: "https://doi.org/example" },
+    { label: "[dataset]", link: "https://example.com/dataset" },
+    { label: "[pdf]", link: "https://example.com/paper.pdf" }
+  ]
 }
 ```
 
-Empty arrays display “Details coming soon.” Publications use all entries from the local Scholar dataset, newest first; set `publicationOverrides` in `publications.js` to an array if you want a curated list. Update the dataset through the existing `RSS.py` workflow.
+Empty arrays display “Details coming soon.” Media links appear as DOI, Dataset, and PDF buttons beside the title. Publications use all entries from the local Scholar dataset, newest first; set `publicationOverrides` in `publications.js` to an array if you want a curated list. Update the dataset through the existing `RSS.py` workflow.
 
 ## CSS standards
 
