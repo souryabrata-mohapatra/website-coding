@@ -1,4 +1,5 @@
-import { escapeHtml, safeUrl } from "./ui.js";
+import { escapeHtml, renderPublication, safeUrl } from "./ui.js";
+import { journalRatings } from "./journal-ratings.js";
 
 let scholarData = null;
 let visibleCount = 0;
@@ -256,6 +257,10 @@ function renderCarousel() {
 }
 
 function createCardMarkup(article) {
+  const journalRating = article?.citation_id
+    ? journalRatings[article.citation_id]
+    : "";
+
   return `
     <article class="research-card carousel-card">
       <div class="entry-title">
@@ -270,7 +275,8 @@ function createCardMarkup(article) {
 
       <div class="research-card-publication">
         <div class="publication-source">
-          ${escapeHtml(article.publication || article.year || "")}
+          ${renderPublication(article.publication, article.year)}
+          ${journalRating ? `<span class="journal-rating" title="SCImago journal quartile">${escapeHtml(journalRating)}</span>` : ""}
         </div>
       </div>
     </article>

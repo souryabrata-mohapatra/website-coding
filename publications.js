@@ -1,7 +1,5 @@
 import { renderEntry } from "./ui.js";
 
-// By default use scholar_complete.json, also used by the Bio feed.
-
 const publicationFigures = [
   { number: 20, file: "paper 20.jpg" },
   { number: 18, file: "paper 18.jpg" },
@@ -254,6 +252,8 @@ export function renderPublications() {
 }
 
 export function mountPublications(data, error) {
+
+  // Use own publications if available, otherwise use data from the API
   const entries = publicationOverrides ?? data?.articles ?? [];
   document.getElementById("publication-list").innerHTML = entries.length
     ? entries.map((entry, index) => renderEntry({ ...entry, label: entries.length - index })).join("")

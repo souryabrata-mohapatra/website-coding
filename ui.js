@@ -14,9 +14,12 @@ export function safeUrl(value) {
   }
 }
 
-function renderPublication(publication, year) {
+export function renderPublication(publication, year) {
+  if (publication && year && !/\b\d{4}\b/.test(publication)) {
+    return `<em>${escapeHtml(publication)}</em>, ${escapeHtml(year)}`;
+  }
   const value = publication || year || "";
-  const journalMatch = value.match(/^(.+?)(?=(?:\s+\d+(?:\s*\([^)]*\))?\s*:)|:\s*\d)/);
+  const journalMatch = value.match(/^(.+?)(?=(?:\s+\d+(?:\s*\([^)]*\))?\s*:)|[:,]\s*\d)/);
   if (!journalMatch) return escapeHtml(value);
   return `<em>${escapeHtml(journalMatch[1].trim())}</em>${escapeHtml(value.slice(journalMatch[1].length))}`;
 }
