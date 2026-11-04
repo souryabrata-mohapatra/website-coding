@@ -15,7 +15,7 @@ export const profile = {
     "Teaching is one of the most fulfilling aspects of my work. I especially enjoy teaching microeconomics, environmental economics, and econometrics.",
     "I am always open to new ideas. Please feel free to drop me an email."
   ],
-  interests: ["Applied Economics", "Climate Change", "Agricultural Transformation", "Green Transition", "Just Migration"],
+  interests: ["Applied Economics", "Agricultural Transformation", "Climate Change", "Green Transition", "Just Migration"],
   links: [
     { label: "Email", icon: "mail.jpeg", href: "mailto:smohapatra@iitj.ac.in" },
     { label: "CV", icon: "cv.jpeg", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
@@ -38,9 +38,14 @@ export function renderBio() {
     <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
     <div class="bio-details">
       <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
-      <aside class="interest-list" aria-label="Research interests">
-        <span class="keyword keyword-fixed">Applied Economics</span>
-        <div class="keyword-stack">${profile.interests.filter((interest) => interest !== "Applied Economics").map((interest, index) => `<span class="keyword${index === 0 ? " is-emphasized" : ""}" data-keyword-index="${index}">${escapeHtml(interest)}</span>`).join("")}</div>
+      <aside class="interest-list" aria-labelledby="interests-title">
+        <h3 id="interests-title" class="interest-title">Research interests</h3>
+        <div class="interest-orbit" role="img" aria-label="Applied Economics connected to agricultural transformation, climate change, green transition, and just migration">
+          <strong class="interest-core">Applied Economics</strong>
+          <div class="keyword-stack">
+            ${profile.interests.filter((interest) => interest !== "Applied Economics").map((interest, index) => `<span class="keyword${index === 0 ? " is-emphasized" : ""}" data-keyword-index="${index}" tabindex="0">${escapeHtml(interest)}</span>`).join("")}
+          </div>
+        </div>
       </aside>
     </div>
     <div class="research-feed" aria-labelledby="research-feed-title">
