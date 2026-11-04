@@ -131,9 +131,9 @@ h1:focus, h2:focus, main:focus { outline: none; }
 .keyword-stack { position: absolute; inset: 0; }
 .keyword { position: absolute; z-index: 3; width: 30%; color: var(--color-muted); font-size: var(--font-label); line-height: 1.25; text-align: center; cursor: default; transition: color 200ms ease, font-weight 200ms ease, text-shadow 200ms ease; }
 .keyword:nth-child(1) { top: 8%; left: 50%; width: 48%; transform: translateX(-50%); }
-.keyword:nth-child(2) { top: 50%; left: 72%; transform: translateY(-50%); }
-.keyword:nth-child(3) { top: 84%; left: 50%; width: 48%; transform: translateX(-50%); }
-.keyword:nth-child(4) { top: 50%; left: 0; width: 28%; transform: translateY(-50%); }
+.keyword:nth-child(2) { top: 50%; left: 71%; transform: translateY(-50%); }
+.keyword:nth-child(3) { top: 80%; left: 50%; width: 48%; transform: translateX(-50%); }
+.keyword:nth-child(4) { top: 50%; left: 0; width: 30%; transform: translateY(-50%); }
 .keyword:hover, .keyword:focus-visible { color: var(--color-link-hover); font-weight: 700; text-shadow: 0 0 12px rgb(192 0 0 / 18%); outline: none; }
 .keyword.is-emphasized { color: var(--color-link); font-weight: 700; text-shadow: 0 0 12px rgb(0 128 128 / 18%); }
 .interest-orbit:has(.keyword:nth-child(1).is-emphasized) { background: conic-gradient(from -45deg, #d9eeee 0 25%, #f1f5f4 25% 50%, #e5f1f0 50% 75%, #f1f5f4 75% 100%); }
