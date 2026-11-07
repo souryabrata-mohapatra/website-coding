@@ -1,4 +1,4 @@
-import { renderEntry } from "./ui.js";
+import { renderEntry, renderImage } from "./ui.js";
 
 // Add entries as { title, authors, year, description, link, abstract }.
 export const workingPapers = [
@@ -29,8 +29,8 @@ export const workingPapers = [
 ];
 
 const workingPaperFigures = [
-  { file: "WP_1.png", caption: "Source: Working paper 3" },
-  { file: "WP_2.png", caption: "Source: Working paper 2" }
+  { file: "WP_1.webp", caption: "Source: Working paper 3" },
+  { file: "WP_2.webp", caption: "Source: Working paper 2" }
 ];
 
 export function renderWorkingPapers() {
@@ -42,7 +42,7 @@ export function renderWorkingPapers() {
       </div>
       <aside class="publication-gallery" aria-label="Working paper figures">
         ${workingPaperFigures.map(({ file, caption }) => `<figure class="publication-figure">
-          <img src="images/working_paper/${file}" alt="${caption}" loading="lazy" decoding="async">
+          ${renderImage(`images/working_paper/${file}`, caption)}
           <figcaption>${caption}</figcaption>
         </figure>`).join("")}
       </aside>

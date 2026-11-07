@@ -14,6 +14,12 @@ export function safeUrl(value) {
   }
 }
 
+export function renderImage(src, alt, { loading = "lazy", fetchPriority = "auto", className = "" } = {}) {
+  const classAttribute = className ? ` class="${escapeHtml(className)}"` : "";
+  const priorityAttribute = fetchPriority === "auto" ? "" : ` fetchpriority="${escapeHtml(fetchPriority)}"`;
+  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}"${classAttribute} loading="${escapeHtml(loading)}" decoding="async"${priorityAttribute}>`;
+}
+
 export function renderPublication(publication, year) {
   if (publication && year && !/\b\d{4}\b/.test(publication)) {
     return `<em>${escapeHtml(publication)}</em>, ${escapeHtml(year)}`;

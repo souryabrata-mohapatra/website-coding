@@ -1,4 +1,4 @@
-import { escapeHtml } from "./ui.js";
+import { escapeHtml, renderImage } from "./ui.js";
 
 // Add entries with a title, funder/category, and duration.
 export const projects = [
@@ -7,7 +7,7 @@ export const projects = [
     type: "ICSSR Major",
     duration: "2026–2028",
     figure: {
-      file: "images/projects/project_1.png",
+      file: "images/projects/project_1.webp",
       caption: "Chilika Lake and ecotourism"
     }
   }
@@ -25,7 +25,7 @@ export function renderProjects() {
       </div>
       ${figure ? `<aside class="publication-gallery" aria-label="Project figure">
         <figure class="publication-figure project-figure">
-          <img src="${escapeHtml(figure.file)}" alt="${escapeHtml(figure.caption)}" loading="lazy" decoding="async">
+          ${renderImage(figure.file, figure.caption)}
           <figcaption>${escapeHtml(figure.caption)}</figcaption>
         </figure>
       </aside>` : ""}

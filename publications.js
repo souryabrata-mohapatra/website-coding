@@ -1,19 +1,19 @@
-import { renderEntry } from "./ui.js";
+import { renderEntry, renderImage } from "./ui.js";
 
 const publicationFigures = [
-  { number: 20, file: "paper 20.jpg" },
-  { number: 18, file: "paper 18.jpg" },
-  { number: 17, file: "paper 17.png" },
-  { number: 13, file: "paper 13.png" },
-  { number: 12, file: "paper 12.png" },
-  { number: 11, file: "paper 11.jpg" },
-  { number: 9, file: "paper 9.png" },
-  { number: 7, file: "paper 7.jpg" },
-  { number: 5, file: "paper 5.jpg" },
-  { number: 4, file: "paper 4.jpg" },
-  { number: 3, file: "paper 3.png" },
-  { number: 2, file: "paper 2.png" },
-  { number: 1, file: "paper 1.jpg" }
+  { number: 20, file: "paper 20.webp" },
+  { number: 18, file: "paper 18.webp" },
+  { number: 17, file: "paper 17.webp" },
+  { number: 13, file: "paper 13.webp" },
+  { number: 12, file: "paper 12.webp" },
+  { number: 11, file: "paper 11.webp" },
+  { number: 9, file: "paper 9.webp" },
+  { number: 7, file: "paper 7.webp" },
+  { number: 5, file: "paper 5.webp" },
+  { number: 4, file: "paper 4.webp" },
+  { number: 3, file: "paper 3.webp" },
+  { number: 2, file: "paper 2.webp" },
+  { number: 1, file: "paper 1.webp" }
 ];
 const enlargedPublicationFigures = new Set([18, 17, 4]);
 
@@ -243,7 +243,7 @@ export function renderPublications() {
       </div>
       <aside class="publication-gallery" aria-label="Publication figures">
          ${publicationFigures.map(({ number, file }) => `<figure class="publication-figure${enlargedPublicationFigures.has(number) ? " publication-figure--enlarged" : ""}">
-          <img src="images/${file}" alt="Figure for paper ${number}" loading="lazy" decoding="async">
+          ${renderImage(`images/${file}`, `Figure for paper ${number}`)}
           <figcaption>Source: Publication ${number}</figcaption>
         </figure>`).join("")}
       </aside>
