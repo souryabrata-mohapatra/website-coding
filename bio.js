@@ -1,5 +1,5 @@
 import { initializeResearchFeed } from "./app.js";
-import { escapeHtml, safeUrl } from "./ui.js";
+import { escapeHtml, renderImage, safeUrl } from "./ui.js";
 
 // Edit profile copy and links here. The portrait is shared with the sidebar.
 export const profile = {
@@ -7,7 +7,7 @@ export const profile = {
   role: "Assistant Professor",
   department: "Department of Economics",
   institution: "IIT Jodhpur",
-  image: "sourya.jpg",
+  image: "sourya.webp",
   heading: "Hello and welcome!",
   paragraphs: [
     "I am an Assistant Professor in the Department of Economics at IIT Jodhpur. I completed my PhD in Economics from the University of Auckland Business School.",
@@ -17,19 +17,19 @@ export const profile = {
   ],
   interests: ["Applied Economics", "Agricultural Transformation", "Climate Change", "Green Transition", "Just Migration"],
   links: [
-    { label: "Email", icon: "mail.jpeg", href: "mailto:smohapatra@iitj.ac.in" },
-    { label: "CV", icon: "cv.jpeg", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
-    { label: "Google Scholar", icon: "scholar.jpeg", href: "https://scholar.google.com/citations?user=TKbYqt0AAAAJ&hl=en" },
-    { label: "LinkedIn", icon: "linkedin.jpeg", href: "https://www.linkedin.com/in/souryabrata" },
-    { label: "ORCID", icon: "iD.jpeg", href: "https://orcid.org/0000-0002-3627-8739" },
-    { label: "GitHub", icon: "github.jpeg", href: "https://github.com/souryabrata-mohapatra" }
+    { label: "Email", icon: "mail.webp", href: "mailto:smohapatra@iitj.ac.in" },
+    { label: "CV", icon: "cv.webp", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
+    { label: "Google Scholar", icon: "scholar.webp", href: "https://scholar.google.com/citations?user=TKbYqt0AAAAJ&hl=en" },
+    { label: "LinkedIn", icon: "linkedin.webp", href: "https://www.linkedin.com/in/souryabrata" },
+    { label: "ORCID", icon: "iD.webp", href: "https://orcid.org/0000-0002-3627-8739" },
+    { label: "GitHub", icon: "github.webp", href: "https://github.com/souryabrata-mohapatra" }
   ],
 
 };
 
 export function renderProfileLinks() {
   return profile.links.map(({ label, icon, href }) =>
-    `<a href="${safeUrl(href)}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" class="social-icon"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"'}><img src="icons/${escapeHtml(icon)}" alt="" loading="lazy" width="36" height="36"></a>`
+    `<a href="${safeUrl(href)}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" class="social-icon"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"'}>${renderImage(`icons/${icon}`, "", { className: "social-icon-image" })}</a>`
   ).join("");
 }
 

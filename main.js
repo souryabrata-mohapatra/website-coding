@@ -2,7 +2,7 @@ import { profile, renderProfileLinks, renderBio, mountBio } from "./bio.js";
 import { renderWorkingPapers } from "./working-papers.js";
 import { renderPublications, mountPublications } from "./publications.js";
 import { renderProjects } from "./projects.js";
-import { escapeHtml } from "./ui.js";
+import { escapeHtml, renderImage } from "./ui.js";
 
 const SCROLL_STORAGE_KEY = "academic-site-scroll-y";
 history.scrollRestoration = "manual";
@@ -32,7 +32,7 @@ document.getElementById("app").innerHTML = `
   <div class="site-shell">
     <aside class="sidebar" aria-label="Profile and navigation">
       <div class="sidebar-profile">
-        <a class="portrait-link" href="#bio" aria-label="Go to biography"><img class="portrait" src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.name)}" width="200" height="220"></a>
+        <a class="portrait-link" href="#bio" aria-label="Go to biography">${renderImage(profile.image, profile.name, { loading: "eager", fetchPriority: "high", className: "portrait" })}</a>
         <div class="sidebar-identity">
           <h1 class="sidebar-title">${escapeHtml(profile.name)}</h1>
           <span>${escapeHtml(profile.role)}</span>
