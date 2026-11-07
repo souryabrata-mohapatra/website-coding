@@ -1,76 +1,43 @@
-# Souryabrata Mohapatra — academic website
+# Souryabrata Mohapatra
 
-A static, single-page website with a fixed desktop sidebar and independently editable sections. On small screens the profile and navigation sit above the content. No build step is required.
+Official academic website of **Souryabrata Mohapatra**, Assistant Professor of
+Economics at the Indian Institute of Technology Jodhpur.
 
-## Preview locally
+## About
 
-From this directory, run `python -m http.server 8000`, then open `http://localhost:8000`. Use an HTTP server rather than opening `index.html` directly because the page uses JavaScript modules and fetches JSON.
+Souryabrata Mohapatra is an economist whose research focuses on climate risks,
+agricultural transformation, circular systems, energy transitions, and distress
+migration.
+
+## Research
+
+The website presents his publications, working papers, research projects, and
+academic interests.
+
+## Teaching
+
+His teaching interests include microeconomics, environmental economics, and
+econometrics.
+
+## Academic profiles
+
+- [IIT Jodhpur faculty profile](https://iitj.ac.in/People/Profile/4fb56892-ba9f-4c24-b406-b68b8928934b)
+- [Google Scholar](https://scholar.google.com/citations?user=TKbYqt0AAAAJ&hl=en)
+- [ORCID](https://orcid.org/0000-0002-3627-8739)
+- [LinkedIn](https://www.linkedin.com/in/souryabrata)
+- [Curriculum Vitae](https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing)
+
+## Website
+
+The public website is available at
+<https://souryabrata-mohapatra.github.io/website-coding/>.
+
+The Google Sites page is available at
+<https://sites.google.com/view/souryabrata/home>.
 
 ## Search indexing
 
-The public Google Sites URL is the canonical site:
-`https://sites.google.com/view/souryabrata/home`.
-
-`index.html` permits indexing. After deploying changes, add the Google Sites URL
-as a property in Google Search Console and request indexing. Keep the Google
-Sites page public and link to the embedded site with visible text; hiding a page
-from Google Sites navigation does not itself block indexing, but it can make the
-page harder for crawlers to discover.
-
-## File responsibilities
-
-| File | Edit here |
-| --- | --- |
-| `main.js` | Page shell, section order, sidebar navigation, shared data loading |
-| `bio.js` | Welcome heading, biography, rotating interests, portrait path, contact/profile links |
-| `app.js` | Research feed carousel, mounted inside Bio |
-| `working-papers.js` | Working paper entries and figures |
-| `publications.js` | Publication list and optional curated overrides |
-| `projects.js` | Project entries and funder/category metadata |
-| `teaching.js` | Institutions, teaching roles, and course lists |
-| `ui.js` | Shared entry markup and HTML/URL helpers |
-| `style.css` | Design tokens, layout, shared components, responsive rules |
-| `scholar_complete.json` | Publication data shared by the feed and Publications |
-
-Navigation uses section anchors (`#bio`, `#working-papers`, `#publications`, `#projects`). Links support direct loading and browser back/forward; the active sidebar item follows scrolling.
-
-## Content format
-
-Populate the arrays in `working-papers.js` and `projects.js` with objects:
-
-```js
-{
-  title: "Paper or project title",
-  authors: "Author names",
-  year: "2026",
-  publication: "Journal name",
-  description: "Optional description",
-  link: "https://example.com/paper",
-  abstract: "Optional expandable abstract",
-  media: [
-    { label: "[paper]", link: "https://doi.org/example" },
-    { label: "[dataset]", link: "https://example.com/dataset" },
-    { label: "[pdf]", link: "https://example.com/paper.pdf" }
-  ]
-}
-```
-
-Empty arrays display “Details coming soon.” Media links appear as DOI, Dataset, and PDF buttons beside the title. Publications use all entries from the local Scholar dataset, newest first; set `publicationOverrides` in `publications.js` to an array if you want a curated list. Update the dataset through the existing `RSS.py` workflow.
-
-## CSS standards
-
-Use the variables at the top of `style.css` for site-wide changes:
-
-| Role | Size token | Color token |
-| --- | --- | --- |
-| Body copy | `--font-body` (16px) | `--color-text` |
-| Professor name heading | `--font-title` (responsive) | `--color-heading` |
-| Section headings | `--font-section` (20px) | `--color-heading` |
-| Paper/course headings | `--font-entry` (16px) | `--color-heading` |
-| Supporting text | `--font-small` (14px) | `--color-muted` |
-| Interest labels | `--font-label` (13px) | `--color-label` |
-| Links | Inherited size | `--color-link` |
-
-Reuse `.page-section`, `.section-title`, `.entry`, `.entry-title`, `.entry-meta`, and `.label` across sections. `.research-card` owns card appearance; `.carousel-*` rules own carousel layout and controls. Use the spacing tokens rather than adding separate typography or colors for each section.
-
-The existing GitHub Pages and Scholar update workflows remain in place. A failed data request leaves the profile, navigation, and other sections usable, with a local unavailable message for the feed and Publications.
+The website is configured for search indexing through
+[robots.txt](./robots.txt) and [sitemap.xml](./sitemap.xml). To request
+indexing, submit both public URLs in [Google Search
+Console](https://search.google.com/search-console).
