@@ -37,8 +37,8 @@
     "table": [
       {
         "citations": {
-          "all": 230,
-          "since_2021": 228
+          "all": 232,
+          "since_2021": 230
         }
       },
       {
@@ -69,7 +69,7 @@
       },
       {
         "year": 2026,
-        "citations": 127
+        "citations": 128
       }
     ]
   },
