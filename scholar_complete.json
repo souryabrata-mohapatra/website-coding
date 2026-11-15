@@ -37,8 +37,8 @@
     "table": [
       {
         "citations": {
-          "all": 232,
-          "since_2021": 230
+          "all": 233,
+          "since_2021": 231
         }
       },
       {
@@ -69,7 +69,7 @@
       },
       {
         "year": 2026,
-        "citations": 128
+        "citations": 129
       }
     ]
   },
@@ -257,7 +257,7 @@
       "authors": "A Paul, MK Behera, D Sahoo, S Mohapatra",
       "publication": "Journal of the Asia Pacific Economy, 1-36, 2025",
       "cited_by": {
-        "value": 2,
+        "value": 3,
         "link": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=15363612285326798620",
         "serpapi_link": "https://serpapi.com/search.json?cites=15363612285326798620&engine=google_scholar&hl=en",
         "cites_id": "15363612285326798620"
