@@ -287,9 +287,7 @@ function getCardStep() {
   const track = document.getElementById("carouselTrack");
   const card = track.querySelector(".carousel-card");
 
-  if (!card) {
-    return 0;
-  }
+  if (!card) { return 0; }
 
   const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
   return card.getBoundingClientRect().width + gap;
