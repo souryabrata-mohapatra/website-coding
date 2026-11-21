@@ -297,8 +297,7 @@ function getCardStep() {
 
 function updateCarouselPosition(smooth = true) {
   const track = document.getElementById("carouselTrack");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  track.style.transition = smooth && !reduceMotion ? "transform 0.5s ease" : "none";
+  track.style.transition = smooth ? "transform 0.5s ease" : "none";
   track.style.transform = `translateX(-${currentIndex * getCardStep()}px)`;
 }
 
@@ -368,7 +367,6 @@ function scheduleAutoPlay() {
 
   if (
     document.hidden ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
     isPointerOverCarousel ||
     isFocusWithinCarousel ||
     getSortedArticles().length <= visibleCount

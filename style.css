@@ -78,7 +78,11 @@ h1:focus, h2:focus, main:focus { outline: none; }
 .social-icon-image { width: 32px; height: 32px; }
 .social-icon-image { border-radius: 50%; object-fit: contain; }
 .social-icon:hover { opacity: 0.78; transform: translateY(-1px); }
-.main-content { margin-left: var(--sidebar-width); padding: 30px 40px 20px; min-width: 0; }
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 30px 40px 20px;
+  min-width: 0;
+}
 
 /* Shared section, label, title, and entry styles. Avoid section-specific fonts. */
 .page-section { margin-bottom: var(--space-section); scroll-margin-top: 40px; }
@@ -274,4 +278,5 @@ h1:focus, h2:focus, main:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  .carousel-track { transition: transform 0.5s ease !important; }
 }
