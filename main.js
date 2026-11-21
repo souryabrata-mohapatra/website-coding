@@ -27,6 +27,7 @@ const navigationItems = [
   { id: "working-papers", section: "working-papers", label: "Working Papers", icon: "M5 7h13v14H5zM8 4h11v14M8 11h7M8 15h7" },
   { id: "projects", section: "projects", label: "Projects", icon: "M3.5 7h7l2 2h8v10h-17zM3.5 9h17" }
 ];
+
 document.getElementById("app").innerHTML = `
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
@@ -51,6 +52,34 @@ document.getElementById("app").innerHTML = `
       <footer class="site-footer">&copy; ${new Date().getFullYear()} ${escapeHtml(profile.name)}. All rights reserved.</footer>
     </main>
   </div>`;
+
+const entranceSidebar = document.querySelector(".sidebar");
+const entranceMain = document.querySelector(".main-content");
+
+entranceSidebar?.animate(
+  [
+    { opacity: 0, transform: "translate3d(-100%, 0, 0)" },
+    { opacity: 1, transform: "translate3d(0, 0, 0)" },
+  ],
+  {
+    duration: 1400,
+    easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+    fill: "both",
+  },
+);
+
+entranceMain?.animate(
+  [
+    { opacity: 0, transform: "translate3d(100%, 0, 0)" },
+    { opacity: 1, transform: "translate3d(0, 0, 0)" },
+  ],
+  {
+    duration: 2000,
+    delay: 0,
+    easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+    fill: "both",
+  },
+);
 
 const navigation = [...document.querySelectorAll(".section-nav a")];
 const sectionElements = sections.map(({ id }) => document.getElementById(id));
@@ -107,21 +136,23 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 setActiveSection("bio");
 
-// Fetch once so the feed and publication list stay in sync. Other sections
-// render immediately and remain available if publication loading fails.
-let data = null;
-let dataError = null;
-try {
-  const response = await fetch("scholar_complete.json");
-  if (!response.ok) throw new Error(`Publication request failed (${response.status})`);
-  data = await response.json();
-  if (!Array.isArray(data.articles)) throw new Error("Invalid publication data");
-} catch (error) {
-  dataError = error;
-  console.error(error);
+async function loadPublicationData() {
+  let data = null;
+  let dataError = null;
+  try {
+    const response = await fetch("scholar_complete.json");
+    if (!response.ok) throw new Error(`Publication request failed (${response.status})`);
+    data = await response.json();
+    if (!Array.isArray(data.articles)) throw new Error("Invalid publication data");
+  } catch (error) {
+    dataError = error;
+    console.error(error);
+  }
+  mountBio(data, dataError);
+  mountPublications(data, dataError);
 }
-mountBio(data, dataError);
-mountPublications(data, dataError);
+loadPublicationData();
+
 // Restore the URL target or the previous reading position after dynamic content
 // has settled, while the app is still hidden to avoid a visible jump.
 requestAnimationFrame(() => {
