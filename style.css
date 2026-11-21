@@ -98,6 +98,14 @@ h1:focus, h2:focus, main:focus { outline: none; }
 .bio-copy { max-width: 78ch; line-height: 1.45; text-align: justify; }
 .bio-copy p { margin-bottom: var(--space-3); }
 .bio-copy p:last-child { margin-bottom: 0; }
+.academic-highlights, .selected-publications { margin-top: var(--space-4); max-width: 78ch; }
+.highlights-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.highlights-grid article { padding: 14px 16px; border: 1px solid var(--color-line); border-left: 3px solid var(--color-accent); background: #fbfdfd; }
+.highlights-grid h3 { margin: 0 0 6px; color: var(--color-heading); font-size: var(--font-small); font-weight: 700; line-height: 1.45; }
+.highlights-grid p { margin: 0; font-size: var(--font-small); line-height: 1.6; }
+.selected-publications ol { margin: 0; padding-left: 1.35rem; }
+.selected-publications li { margin-bottom: 0.8rem; padding-left: 0.25rem; font-size: var(--font-small); line-height: 1.65; }
+.selected-publications li:last-child { margin-bottom: 0; }
 .section-title { position: relative; margin: 0 0 1.25rem; padding-left: 14px; color: var(--color-heading); font-family: var(--font-display); font-size: var(--font-section); font-weight: 600; line-height: 1.4; letter-spacing: 0.01em; }
 .section-title::before { position: absolute; top: 0.18em; bottom: 0.18em; left: 0; width: 2px; background: #777; content: ""; }
 .entry { margin-bottom: var(--space-4); overflow-wrap: anywhere; }
@@ -254,6 +262,7 @@ h1:focus, h2:focus, main:focus { outline: none; }
 
 @media (max-width: 760px) {
   .bio-details { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .highlights-grid { grid-template-columns: minmax(0, 1fr); }
   .interest-list { margin-inline: auto; padding: 2px 0 0; border: 0; }
   .portrait-link { width: 176px; }
   .portrait { height: 220px; }
