@@ -22,12 +22,12 @@ export function renderImage(src, alt, { loading = "lazy", fetchPriority = "auto"
 
 export function renderPublication(publication, year) {
   if (publication && year && !/\b\d{4}\b/.test(publication)) {
-    return `<em>${escapeHtml(publication)}</em>, ${escapeHtml(year)}`;
+    return `<strong>${escapeHtml(publication)}, ${escapeHtml(year)} </strong>`;
   }
   const value = publication || year || "";
   const journalMatch = value.match(/^(.+?)(?=(?:\s+\d+(?:\s*\([^)]*\))?\s*:)|[:,]\s*\d)/);
   if (!journalMatch) return escapeHtml(value);
-  return `<em>${escapeHtml(journalMatch[1].trim())}</em>${escapeHtml(value.slice(journalMatch[1].length))}`;
+  return `<strong>${escapeHtml(journalMatch[1].trim())}${escapeHtml(value.slice(journalMatch[1].length))}</strong>`;
 }
 
 export function renderEntry({ title, authors, publication, year, description, link, abstract, media, label }) {

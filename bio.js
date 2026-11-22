@@ -16,6 +16,7 @@ export const profile = {
     "I am always open to new ideas. Please feel free to drop me an email."
   ],
   interests: ["Applied Economics", "Agricultural Transformation", "Climate Change", "Green Transition", "Just Migration"],
+  news: ["News 1", "News 2", "News 3", "News 4"],
   links: [
     { label: "Email", icon: "mail.webp", href: "mailto:smohapatra@iitj.ac.in" },
     { label: "CV", icon: "cv.webp", href: "https://drive.google.com/file/d/1U140KvmDrV1PHdIoye6PJWZWILVVoAxL/view?usp=sharing" },
@@ -35,15 +36,26 @@ export function renderProfileLinks() {
 
 export function renderBio() {
   return `<section id="bio" class="page-section bio-section" aria-labelledby="bio-title">
-    <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
     <div class="bio-details">
-      <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
+      <div class="bio-introduction">
+        <h2 id="bio-title" class="page-title" tabindex="-1">${escapeHtml(profile.heading)}</h2>
+        <div class="bio-copy">${profile.paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")}</div>
+      </div>
       <aside class="interest-list" aria-labelledby="interests-title">
-        <h3 id="interests-title" class="interest-title">Research interests</h3>
-        <div class="interest-orbit" role="img" aria-label="Applied Economics connected to agricultural transformation, climate change, green transition, and just migration">
-          <strong class="interest-core">Applied Economics</strong>
-          <div class="keyword-stack">
-            ${profile.interests.filter((interest) => interest !== "Applied Economics").map((interest, index) => `<span class="keyword${index === 0 ? " is-emphasized" : ""}" data-keyword-index="${index}" tabindex="0">${escapeHtml(interest)}</span>`).join("")}
+        <div class="info-ticker" data-ticker="news" role="region" aria-labelledby="news-title">
+          <h3 id="news-title" class="info-ticker-title">News</h3>
+          <div class="info-ticker-window">
+            <div class="info-ticker-track" aria-live="polite">
+              ${profile.news.map((item, index) => `<p class="info-ticker-item${index === 0 ? " is-current" : ""}"${index < 2 ? "" : ' aria-hidden="true"'}>${escapeHtml(item)}</p>`).join("")}
+            </div>
+          </div>
+        </div>
+        <div class="info-ticker" data-ticker="interests" role="region" aria-labelledby="interests-title">
+          <h3 id="interests-title" class="info-ticker-title">Research interests</h3>
+          <div class="info-ticker-window">
+            <div class="info-ticker-track" aria-live="polite">
+              ${profile.interests.map((interest, index) => `<p class="info-ticker-item${index === 0 ? " is-current" : ""}"${index < 2 ? "" : ' aria-hidden="true"'}>${escapeHtml(interest)}</p>`).join("")}
+            </div>
           </div>
         </div>
       </aside>
@@ -58,19 +70,45 @@ export function renderBio() {
 export function mountBio(data, error) {
   if (error) {
     document.getElementById("research-feed").innerHTML = '<p class="empty-state" role="status">The research feed is temporarily unavailable. Please try again later.</p>';
-    return;
+  } else {
+    initializeResearchFeed(data);
   }
-  initializeResearchFeed(data);
-  initializeKeywordRotation();
+  initializeTwoRowTicker('[data-ticker="news"]');
+  initializeTwoRowTicker('[data-ticker="interests"]');
 }
 
-function initializeKeywordRotation() {
-  const keywords = [...document.querySelectorAll(".keyword-stack .keyword")];
-  if (keywords.length < 2) return;
-  let activeIndex = 0;
-  window.setInterval(() => {
-    keywords[activeIndex].classList.remove("is-emphasized");
-    activeIndex = (activeIndex + 1) % keywords.length;
-    keywords[activeIndex].classList.add("is-emphasized");
-  }, 2400);
+function initializeTwoRowTicker(selector, initialDelay = 0) {
+  const ticker = document.querySelector(selector);
+  const track = ticker?.querySelector(".info-ticker-track");
+  const items = track ? [...track.querySelectorAll(".info-ticker-item")] : [];
+  if (items.length < 2) return;
+
+  const itemHeight = items[0].offsetHeight;
+  if (!itemHeight) return;
+  const updateVisibleItems = () => {
+    [...track.children].forEach((item, index) => {
+      item.classList.toggle("is-current", index === 0);
+      item.setAttribute("aria-hidden", index > 1 ? "true" : "false");
+    });
+  };
+
+  track.addEventListener("transitionend", (event) => {
+    if (event.target !== track || event.propertyName !== "transform") return;
+
+    track.classList.add("is-resetting");
+    track.append(track.firstElementChild);
+    track.style.transform = "translateY(0)";
+    updateVisibleItems();
+    void track.offsetHeight;
+    track.classList.remove("is-resetting");
+  });
+
+  const advance = () => {
+    track.style.transform = `translateY(-${itemHeight}px)`;
+  };
+
+  window.setTimeout(() => {
+    advance();
+    window.setInterval(advance, 3000);
+  }, initialDelay || 3000);
 }

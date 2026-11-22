@@ -8,7 +8,7 @@ export const projects = [
     duration: "2026–2028",
     figure: {
       file: "images/projects/project_1.webp",
-      caption: "Chilika Lake and ecotourism"
+      // caption: "Chilika Lake and ecotourism"
     }
   }
 ];
@@ -20,13 +20,13 @@ export function renderProjects() {
       <div class="publication-main">
         <article class="entry project-entry">
           <h3 class="entry-title"><span class="entry-label">[${projects.length - index}]</span>${escapeHtml(title)}</h3>
-          <p class="project-meta"><span class="project-type">${escapeHtml(type)}</span><span class="project-duration">${escapeHtml(duration)}</span></p>
+          <p class="project-meta"><span class="project-type">${escapeHtml(type)}, ${escapeHtml(duration)}</span></p>
         </article>
       </div>
       ${figure ? `<aside class="publication-gallery" aria-label="Project figure">
         <figure class="publication-figure project-figure">
           ${renderImage(figure.file, figure.caption)}
-          <figcaption>${escapeHtml(figure.caption)}</figcaption>
+          <figcaption>${escapeHtml(figure?.caption)}</figcaption>
         </figure>
       </aside>` : ""}
     </div>`).join("") : '<p class="empty-state">Details coming soon.</p>'}
